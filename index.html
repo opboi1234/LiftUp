@@ -137,7 +137,7 @@ const nextBtn = document.getElementById('nextBtn');
 const copyBtn = document.getElementById('copyBtn');
 const randomBtn = document.getElementById('randomBtn');
 
-// Fetch a random quote from ZenQuotes API
+// Fetch a random quote from Quotable API
 async function newQuote() {
   try {
     // fade out
@@ -145,13 +145,12 @@ async function newQuote() {
     quoteEl.classList.add('hide');
     authorEl.classList.add('hide');
 
-    const res = await fetch("https://zenquotes.io/api/random");
+    const res = await fetch("https://api.quotable.io/random");
     const data = await res.json();
-    const q = data[0];
 
     setTimeout(() => {
-      quoteEl.textContent = `“${q.q}”`;
-      authorEl.textContent = `— ${q.a}`;
+      quoteEl.textContent = `“${data.content}”`;
+      authorEl.textContent = `— ${data.author}`;
       // fade in
       quoteEl.classList.remove('hide');
       quoteEl.classList.add('show');
