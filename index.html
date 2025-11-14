@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>QuoteSpace</title>
+<title>\LiftUp</title>
 <style>
 :root{
   --bg:#0f172a;
@@ -137,7 +137,10 @@ const nextBtn = document.getElementById('nextBtn');
 const copyBtn = document.getElementById('copyBtn');
 const randomBtn = document.getElementById('randomBtn');
 
-// Fetch a random quote from Quotable API
+// Your API key
+const API_KEY = "MAAnx6QaWGD+76nqdQ3hYw==jY8IQDfYCc3CzbyJ";
+
+// Fetch a random quote from API Ninjas
 async function newQuote() {
   try {
     // fade out
@@ -145,12 +148,15 @@ async function newQuote() {
     quoteEl.classList.add('hide');
     authorEl.classList.add('hide');
 
-    const res = await fetch("https://api.quotable.io/random");
+    const res = await fetch("https://api.api-ninjas.com/v1/quotes", {
+      headers: { "X-Api-Key": API_KEY }
+    });
     const data = await res.json();
+    const q = data[0];
 
     setTimeout(() => {
-      quoteEl.textContent = `“${data.content}”`;
-      authorEl.textContent = `— ${data.author}`;
+      quoteEl.textContent = `“${q.quote}”`;
+      authorEl.textContent = `— ${q.author}`;
       // fade in
       quoteEl.classList.remove('hide');
       quoteEl.classList.add('show');
